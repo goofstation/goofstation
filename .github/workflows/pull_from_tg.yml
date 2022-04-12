@@ -1,0 +1,21 @@
+name: Pull from /tg/ upstream
+on: 
+  schedule:
+    - cron: '*/5 * * * *'
+    # scheduled for every five minutes
+
+jobs:
+  merge-upstream:
+    runs-on: ubuntu-latest
+    steps: 
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          ref: master             # set the branch to merge to
+          fetch-depth: 0 
+      - name: Merge Upstream
+        uses: exions/merge-upstream@v1
+        with:
+          upstream: tgstation/tgstation      # set the upstream repo
+          upstream-branch: master   # set the upstream branch to merge from
+          branch: master          # set the branch to merge to
